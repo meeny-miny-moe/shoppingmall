@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- slider stylesheet -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css?family=Dosis:400,500|Poppins:400,700&display=swap" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="css/responsive.css" rel="stylesheet" />
+</head>
+<body>
+<form role="form" method="post" autocomplete="off">
+    <div class="inputArea">
+        <label>1차 분류</label>
+        <select class="category1">
+            <option value="">전체</option>
+        </select>
+
+        <label>2차 분류</label>
+        <select class="category2">
+            <option value="">전체</option>
+        </select>
+    </div>
+
+    <div class="inputArea">
+        <label for="gdsName">Name</label>
+        <input type="text" id="gdsName" name="gdsName"/>
+    </div>
+    <div class="inputArea">
+        <label for="gdsPrice">Price</label>
+        <input type="text" id="gdsPrice" name="gdsPrice"/>
+    </div>
+    <div class="inputArea">
+        <label for="gdsStock">Quantity</label>
+        <input type="text" id="gdsStock" name="gdsStock"/>
+    </div>
+    <div class="inputArea">
+        <label for="gdsDes">Explaination</label>
+        <textarea rows="5" cols="50" id="gdsDes" name="gdsDes"/>
+    </div>
+    <div class="inputArea">
+        <button type="submit" id="register_Btn">register</button>
+    </div>
+</form>
+
+</body>
+</html>

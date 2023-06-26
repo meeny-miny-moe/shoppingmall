@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Miny</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+  <style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+.dropdown-label{
+  font-size : 12px;
+  margin : 10px;
+  font-weight : bold;
+  color : rgb(50, 50, 50);
+}
+
+.dropdown{
+  position : relative;
+  display : inline-block;
+}
+
+.dropbtn_icon{
+  font-family : 'Material Icons';
+}
+.dropbtn{
+  display : block;
+  border : 2px solid rgb(94, 94, 94);
+  border-radius : 4px;
+  background-color: #fcfcfc;
+  font-weight: 400;
+  color : rgb(124, 124, 124);
+  padding : 12px;
+  width :240px;
+  text-align: left;
+  cursor : pointer;
+  font-size : 12px;
+  z-index :1;
+  position : relative;
+}
+.dropdown-content{
+  display : none;
+  font-weight: 400;
+  background-color: #fcfcfc;
+  min-width : 240px;
+  border-radius: 8px;
+  height : 160px;
+  overflow : scroll;
+  box-shadow: 0px 0px 10px 3px rgba(190, 190, 190, 0.6);
+}
+.dropdown-content::-webkit-scrollbar{
+  width : 5px;
+  height : 10px;
+}
+.dropdown-content::-webkit-scrollbar-thumb{
+  border-radius : 2px;
+  background-color :rgb(194, 194, 194)
+}
+
+.dropdown-content div{
+  display : block;
+  text-decoration : none;
+  color : rgb(37, 37, 37);
+  font-size: 12px;
+  padding : 12px 20px;
+}
+.dropdown-content div:hover{
+  background-color: rgb(226, 226, 226);
+}
+
+.dropdown-content.show{
+  display : block;
+}
+input:focus {
+outline: none;
+border:none;
+background:transparent;
+}
+</style>
+</head>
+<body>
+
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()"
+     class="w3-bar-item w3-button">Close Menu</a>
+  <a href="#food" onclick="w3_close()" th:onclick="|location.href='@{/shop}'|" class="w3-bar-item w3-button">Shop</a>
+  <a href="#about" onclick="w3_close()"  th:onclick="|location.href='@{/board}'|" class="w3-bar-item w3-button">Board</a>
+</nav>
+
+<!-- Top menu -->
+<div class="w3-top">
+  <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
+    <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
+    <div class="w3-right w3-padding-16">Login</div>
+    <div class="w3-center w3-padding-16" th:onclick="|location.href='@{/}'|">MINY</div>
+  </div>
+</div>
+
+<hr id="about">
+
+<!-- About Section -->
+<div>
+  <div class="w3-container w3-padding-32 w3-center" style="width:60%;float:left">
+    <img src="../image/superstar.webp" th:src="@{/image/shoes.webp}" alt="Me" class="w3-image" style="display:block;margin:auto" width="800" height="533">
+    <!--th:src="${item.image}"-->
+  </div>
+  <div class="w3-padding-32" style="height:40%;width:40%;float:right">
+    <h4><b  th:text="${item.itemName}">Product Name</b></h4>
+    <h4><a value="10" th:text="${item.price}" >price</a></h4>
+    <p><a value="설명" th:text="${item.explanation}" >explain</a></p>
+    <div class="dropdown">
+      <button class="dropbtn">
+        <span class="dropbtn_content">색상-사이즈 선택</span>
+        <span class="dropbtn_click" style="font-family: Material Icons; font-size : 16px; color : #3b3b3b; float:right;"
+              onclick="dropdown()">∨</span>
+      </button>
+      <div class="dropdown-content">
+        <div class="fastfood" onclick="showMenu(this.innerText)">black s</div>
+        <div class="fastfood" onclick="showMenu(this.innerText)">black m</div>
+        <div class="fastfood" onclick="showMenu(this.innerText)">black l</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <p>detail cut</p>
+</div>
+  <button class="w-100 btn btn-secondary btn-lg"
+          onclick="location.href='editForm.html'"
+          th:onclick="|location.href='@{{itemId}/edit(itemId=${item.id})}'|"
+          type="button">EDIT
+  </button>
+<hr>
+
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+}
+
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+window.onload=()=>{
+      document.querySelector('.dropbtn_click').onclick = ()=>{
+        dropdown();
+      }
+      document.getElementsByClassName('fastfood').onclick = ()=>{
+        showMenu(value);
+      };
+      dropdown = () => {
+        var v = document.querySelector('.dropdown-content');
+        var dropbtn = document.querySelector('.dropbtn')
+        v.classList.toggle('show');
+        dropbtn.style.borderColor = 'rgb(94, 94, 94)';
+      }
+
+      showMenu=(value)=>{
+        var dropbtn_icon = document.querySelector('.dropbtn_icon');
+        var dropbtn_content = document.querySelector('.dropbtn_content');
+        var dropbtn_click = document.querySelector('.dropbtn_click');
+        var dropbtn = document.querySelector('.dropbtn');
+
+        dropbtn_icon.innerText = '';
+        dropbtn_content.innerText = value;
+        dropbtn_content.style.color = '#252525';
+        dropbtn.style.borderColor = '#3992a8';
+      }
+    }
+    window.onclick= (e)=>{
+      if(!e.target.matches('.dropbtn_click')){
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+
+        var dropbtn_icon = document.querySelector('.dropbtn_icon');
+        var dropbtn_content = document.querySelector('.dropbtn_content');
+        var dropbtn_click = document.querySelector('.dropbtn_click');
+        var dropbtn = document.querySelector('.dropbtn');
+
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+</script>
+
+</body>
+</html>

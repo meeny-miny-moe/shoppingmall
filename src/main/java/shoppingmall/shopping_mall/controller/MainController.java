@@ -31,7 +31,7 @@ public class MainController {
     public String items(Model model) {
         List<Item> items = itemRepository.findAll();
         model.addAttribute("items", items);
-        return "basic/shop";
+        return "basic/board";
 
     }
 }

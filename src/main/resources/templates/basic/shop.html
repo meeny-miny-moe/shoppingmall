@@ -6,20 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+    <link th:href="@{/css/sidebar.css}" rel="stylesheet" />
     <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
 .w3-bar-block .w3-bar-item {padding:20px}
 </style>
 </head>
 <body>
-
-<!-- Sidebar (hidden by default) -->
-<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
-    <a href="javascript:void(0)" onclick="w3_close()"
-       class="w3-bar-item w3-button">Close Menu</a>
-    <a href="#food" onclick="w3_close()" th:onclick="|location.href='@{/shop}'|" class="w3-bar-item w3-button">Shop</a>
-    <a href="#about" onclick="w3_close()" th:onclick="|location.href='@{/board}'|" class="w3-bar-item w3-button">Board</a>
-</nav>
+<!-- Material sidebar -->
+<aside class="sidebar" style="display:none;z-index:2;width:40%;height:100%;min-width:300px" id="mySidebar">
+    <div id="leftside-navigation" class="nano">
+        <ul class="nano-content">
+            <li>
+                <a onclick="w3_close()"><span>Close Menu</span></a>
+            </li>
+            <li class="sub-menu">
+                <a href="javascript:void(0);"><i class="fa fa-cogs"></i><span>Shop</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+                <ul>
+                    <li><a th:onclick="|location.href='@{/shop}'|">TOP</a>
+                    </li>
+                    <li><a th:onclick="|location.href='@{/shop}'|">BOTTOM</a>
+                    </li>
+                    <li><a th:onclick="|location.href='@{/shop}'|">SKIRT/DRESS</a>
+                    </li>
+                    <li><a th:onclick="|location.href='@{/shop}'|">ATC</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sub-menu">
+                <a href="javascript:void(0);"><i class="fa fa-table"></i><span>Board</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+                <ul>
+                    <li><a th:onclick="|location.href='@{/board}'|">Basic Tables</a>
+                    </li>
+                    <li><a th:onclick="|location.href='@{/board}'|">Data Tables</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</aside>
 
 <!-- Top menu -->
 <div class="w3-top">
@@ -142,20 +167,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
         </div>
     </footer>
 </div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/javascript/sidebar.js}"></script>
 
     <!-- End page content -->
-
-<script>
-// Script to open and close sidebar
-function w3_open() {
-  document.getElementById("mySidebar").style.display = "block";
-}
-
-function w3_close() {
-  document.getElementById("mySidebar").style.display = "none";
-}
-</script>
 
 </body>
 </html>

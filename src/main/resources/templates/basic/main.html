@@ -1,63 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="basic/fragment/headtag :: common_header(~{::title})">
     <title>Miny</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
-    <link th:href="@{/css/sidebar.css}" rel="stylesheet" />
-    <style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
-.w3-bar-block .w3-bar-item {padding:20px}
-</style>
 </head>
-<body>
+
 
 <!-- Material sidebar -->
-<aside class="sidebar" style="display:none;z-index:2;width:40%;height:100%;min-width:300px" id="mySidebar">
-    <div id="leftside-navigation" class="nano">
-        <ul class="nano-content">
-            <li>
-                <a onclick="w3_close()"><span>Close Menu</span></a>
-            </li>
-            <li class="sub-menu">
-                <a href="javascript:void(0);"><i class="fa fa-cogs"></i><span>Shop</span><i class="arrow fa fa-angle-right pull-right"></i></a>
-                <ul>
-                    <li><a th:onclick="|location.href='@{/shop}'|">TOP</a>
-                    </li>
-                    <li><a th:onclick="|location.href='@{/shop}'|">BOTTOM</a>
-                    </li>
-                    <li><a th:onclick="|location.href='@{/shop}'|">SKIRT/DRESS</a>
-                    </li>
-                    <li><a th:onclick="|location.href='@{/shop}'|">ATC</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="sub-menu">
-                <a href="javascript:void(0);"><span>Board</span><i class="arrow fa fa-angle-right pull-right"></i></a>
-                <ul>
-                    <li><a th:onclick="|location.href='@{/board}'|">Basic Tables</a>
-                    </li>
-                    <li><a th:onclick="|location.href='@{/board}'|">Data Tables</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-</aside>
+<div th:replace="~{basic/fragment/navigation :: sidebar}"></div>
 
 <!-- Top menu -->
-<div class="w3-top">
-    <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
-        <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
-        <div class="w3-right w3-padding-16">Login</div>
-        <div class="w3-center w3-padding-16" th:onclick="|location.href='@{/}'|">MINY</div>
-    </div>
-</div>
+<div th:replace="~{basic/fragment/header :: header}"></div>
 
     <hr id="about">
-
     <!-- About Section -->
     <div class="w3-container w3-padding-32 w3-center">
         <h3>About Me, About Me</h3><br>
@@ -69,10 +23,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
         </div>
     </div>
     <hr>
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" th:src="@{/javascript/sidebar.js}"></script>
-
 </body>
 </html>

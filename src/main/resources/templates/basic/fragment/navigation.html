@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<aside  th:fragment="sidebar" class="sidebar" style="display:none;z-index:2;width:40%;height:100%;min-width:300px" id="mySidebar">
+  <div id="leftside-navigation" class="nano">
+    <ul class="nano-content">
+      <li>
+        <a onclick="w3_close()"><span>Close Menu</span></a>
+      </li>
+      <li class="sub-menu">
+        <a href="javascript:void(0);"><i class="fa fa-cogs"></i><span>Shop</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+        <ul>
+          <li><a th:onclick="|location.href='@{/shop}'|">All</a></li>
+          <li><a th:onclick="|location.href='@{/shop}'|">TOP</a>
+          </li>
+          <li><a th:onclick="|location.href='@{/shop}'|">BOTTOM</a>
+          </li>
+          <li><a th:onclick="|location.href='@{/shop}'|">SKIRT/DRESS</a>
+          </li>
+          <li><a th:onclick="|location.href='@{/shop}'|">ATC</a>
+          </li>
+        </ul>
+      </li>
+      <li class="sub-menu">
+        <a href="javascript:void(0);"><span>Board</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+        <ul>
+          <li><a th:onclick="|location.href='@{/board}'|">Basic Tables</a>
+          </li>
+          <li><a th:onclick="|location.href='@{/board}'|">Data Tables</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</aside>
+</body>
+</html>

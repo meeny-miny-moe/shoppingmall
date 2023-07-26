@@ -1,102 +1,3 @@
-<!--<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<form action="item.html" th:action method="post">
-    <div class="inputArea">
-        <label>1차 분류</label>
-        <select class="category1">
-            <option value="">전체</option>
-        </select>
-
-        <label>2차 분류</label>
-        <select class="category2">
-            <option value="">전체</option>
-        </select>
-    </div>
-
-    <div class="inputArea">
-        <label for="itemName">Name</label>
-        <input type="String" id="itemName" name="itemName"/>
-    </div>
-    <div class="inputArea">
-        <label for="gdsPrice">Price</label>
-        <input type="Integer" id="gdsPrice" name="gdsPrice"/>
-    </div>
-    <div class="inputArea">
-        <label for="price">Quantity</label>
-        <input type="Integer" id="price" name="price"/>
-    </div>
-    <div class="inputArea">
-        <label for="explanation">Explanation</label>
-        <textarea rows="5" cols="50" id="explanation" name="explanation"></textarea>
-    </div>
-</form>
-<div class="inputArea">
-    <button type="submit" id="register_Btn" th:onclick="|location.href='@{/basic/items}'|">register</button>
-</div>
-
-</body>
-</html>-->
-<!--
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8">
-    <link href="../css/bootstrap.min.css"
-          th:href="@{/css/bootstrap.min.css}"
-          rel="stylesheet">
-    <style>
- .container {
- max-width: 560px;
- }
- </style>
-</head>
-<body>
-<div class="container">
-    <div class="py-5 text-center">
-        <h2>상품 등록 폼</h2>
-    </div>
-    <h4 class="mb-3">상품 입력</h4>
-    <form action="item.html" th:action method="post">
-        <div>
-            <label for="itemName">상품명</label>
-            <input type="text" id="itemName" name="itemName" class="formcontrol"
-                   placeholder="이름을 입력하세요">
-        </div> <div>
-        <label for="price">가격</label>
-        <input type="text" id="price" name="price" class="form-control"
-               placeholder="가격을 입력하세요">
-    </div>
-        <div>
-            <label for="quantity">수량</label>
-            <input type="text" id="quantity" name="quantity" class="formcontrol"
-                   placeholder="수량을 입력하세요">
-        </div>
-        <div>
-            <label for="explanation">설명</label>
-            <input type="text" id="explanation" name="explanation" class="formcontrol"
-                   placeholder="수량을 입력하세요">
-        </div>
-        <hr class="my-4">
-        <div class="row">
-            <div class="col">
-                <button class="w-100 btn btn-primary btn-lg" type="submit">상품 등록</button>
-            </div>
-            <div class="col">
-                <button class="w-100 btn btn-secondary btn-lg"
-                        onclick="location.href='items.html'"
-                        th:onclick="|location.href='@{/basic/items}'|"
-                        type="button">취소</button>
-            </div>
-        </div>
-    </form>
-</div>  /container
-</body>
-</html>-->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -148,93 +49,44 @@ textarea {
   </style>
 </head>
 <body>
-<form action="item.html" th:action method="post">
+<form action="item.html" th:action th:object="${item}" method="post">
     <h1>Product Registration Form</h1>
-
     <hr />
-
     <div>
         <label for="itemName">상품명</label>
-        <input type="text" name="itemName" id="itemName" placeholder="상품명을 입력하세요" class="formcontrol" />
+        <input type="text" id="itemName" th:field="*{itemName}" placeholder="상품명을 입력하세요" class="formcontrol" />
     </div>
 
     <div>
         <label for="price">Price</label>
-        <input type="text" name="price" id="price" class="form-control" placeholder="가격을 입력하세요">
+        <input type="text" id="price" th:field="*{price}" class="form-control" placeholder="가격을 입력하세요">
     </div>
     <div>
         <label for="quantity">수량</label>
-        <input type="text" id="quantity" name="quantity" class="formcontrol" placeholder="수량을 입력하세요">
+        <input type="text" id="quantity" th:field="*{quantity}" class="formcontrol" placeholder="수량을 입력하세요">
     </div>
     <div>
         <label for="explanation">설명</label>
-        <textarea type="text" rows="5" cols="25" id="explanation" name="explanation" class="formcontrol" placeholder="설명을 입력하세요"></textarea>
+        <textarea type="text" rows="5" cols="25" id="explanation" th:field="*{explanation}" class="formcontrol" placeholder="설명을 입력하세요"></textarea>
     </div>
-
+    <!--check box-->
     <div>
-        <fieldset>
-            <legend>분류</legend>
+        <div>상품 종류</div>
+
+        <div th:each="type : ${itemTypes}" class="form-check form-check-inline">
             <p>
-                <input type="radio" name="classification" id="top" value="top" required />
-                <label for="top">TOP</label>
+            <input type="radio" th:field="*{itemType}" th:value="${type.name()}" class="form-check-input">
+            <label th:for="${#ids.prev('itemType')}" th:text="${type.description}" class="form-check-label">
+                TOP
+            </label>
             </p>
-            <p>
-                <input type="radio" name="classification" id="bottom" value="bottom" required />
-                <label for="bottom">BOTTOM</label>
-            </p>
-            <p>
-                <input type="radio" name="classification" id="dress" value="dress" required />
-                <label for="dress">DRESS</label>
-            </p>
-            <p>
-                <input type="radio" name="classification" id="add" value="add" required />
-                <label for="add">ACC</label>
-            </p>
-        </fieldset>
+        </div>
     </div>
 
-
-    <!--
-      <div>
-        <label for="product">Select Product</label>
-        <select name="product" id="product" required>
-          <option disabled selected></option>
-          <option value="modelX">Model X</option>
-          <option value="modelY">Model Y</option>
-          <option value="modelZ">Model Z</option>
-        </select>
-      </div>
-
-      <div>
-        <label for="extra">Model Z Extra Options (3)</label>
-        <select name="extra" id="extra" multiple size="5">
-          <option value="option-one">Option One</option>
-          <option value="option-two">Option Two</option>
-          <option value="option-three">Option Three</option>
-          <option value="option-four">Option Four</option>
-          <option value="option-five">Option Five</option>
-        </select>
-      </div>
-
-      <div>
-        <label for="date">Date Purchased</label>
-        <input type="date" name="date" id="date" required />
-      </div>
-
-      <div>
-        <label for="serial">Serial Number</label>
-        <input type="text" name="serial" id="serial" placeholder="XXXX-XXXX-XXXX-XXXX" required pattern="([a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4})" title="Please enter 16 numbers and letters." />
-      </div>
-    -->
     <div>
         <label for="image">Photo Upload (Optional)</label>
         <input type="file" name="image" id="image" accept="image/png, image/jpg, image/webp">
     </div>
-    <!--
-      <div>
-        <input type="checkbox" name="terms" id="terms" checked required />
-        <label for="terms">I agree to the Terms & Conditions</label>
-      </div>-->
 
     <div class="row">
         <div class="col">

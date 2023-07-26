@@ -50,49 +50,38 @@ textarea {
 </head>
 <body>
 
-<form action="item.html" th:action method="post">
+<form action="item.html" th:action th:object="${item}" method="post">
     <h1>Product Registration Form</h1>
-
     <hr />
-
     <div>
         <label for="itemName">상품명</label>
-        <input type="text" name="itemName" id="itemName" class="formcontrol" th:value="${item.id}" readonly />
+        <input type="text" id="itemName" class="formcontrol" th:field="*{itemName}" />
     </div>
 
     <div>
         <label for="price">Price</label>
-        <input type="text" name="price" id="price" class="form-control" th:value="${item.price}">
+        <input type="text" id="price" class="form-control" th:field="*{price}">
     </div>
     <div>
         <label for="quantity">수량</label>
-        <input type="text" id="quantity" name="quantity" class="formcontrol" th:value="${item.quantity}">
+        <input type="text" id="quantity" class="formcontrol" th:field="*{quantity}">
     </div>
     <div>
         <label for="explanation">설명</label>
-        <textarea type="text" rows="5" cols="25" id="explanation" name="explanation" th:text="${item.explanation}"></textarea>
+        <textarea type="text" rows="5" cols="25" id="explanation" th:field="*{explanation}"></textarea>
     </div>
 
+    <!--check box-->
     <div>
-        <fieldset>
-            <legend>분류</legend>
+        <div>상품 종류</div>
+        <div th:each="type : ${itemTypes}" class="form-check form-check-inline">
             <p>
-                <input type="radio" name="classification" id="top" value="top" required />
-                <label for="top">TOP</label>
+                <input type="radio" th:field="*{itemType}" th:value="${type.name()}" class="form-check-input">
+                <label th:for="${#ids.prev('itemType')}" th:text="${type.description}" class="form-check-label">
+                    TOP
+                </label>
             </p>
-            <p>
-                <input type="radio" name="classification" id="bottom" value="bottom" required />
-                <label for="bottom">BOTTOM</label>
-            </p>
-            <p>
-                <input type="radio" name="classification" id="dress" value="dress" required />
-                <label for="dress">DRESS</label>
-            </p>
-            <p>
-                <input type="radio" name="classification" id="add" value="add" required />
-                <label for="add">ACC</label>
-            </p>
-        </fieldset>
+        </div>
     </div>
 
     <div>

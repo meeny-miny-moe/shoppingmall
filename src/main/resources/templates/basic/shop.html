@@ -4,7 +4,7 @@
     <title>Miny</title>
 </head>
 <body>
-<!-- Material sidebar -->
+<!-- sidebar -->
 <div th:replace="~{basic/fragment/navigation :: sidebar}"></div>
 
 <!-- Top menu -->
@@ -48,30 +48,9 @@
 
     <!-- First Photo Grid-->
     <!--상품 조건문 템플릿 조각 사용-->
-    <div class="w3-row-padding w3-padding-16 w3-center" id="food">
-        <div class="w3-quarter" th:each="item : ${items}">
-            <img src="../image/shoes.webp" th:src="@{/image/shoes.webp}" alt="clothes" style="width:100%">
-            <h6><a href="item.html" th:href="@{item/{itemId}(itemId=${item.id})}" th:text="${item.itemName}">상품명</a></h6>
-            <p th:text="${item.price}">10000</p>
-        </div>
-        <!--
-        <div class="w3-quarter">
-            <img src="/w3images/steak.jpg" alt="Steak" style="width:100%">
-            <h3>Let Me Tell You About This Steak</h3>
-            <p>Once again, some random text to lorem lorem lorem lorem ipsum text praesent tincidunt ipsum lipsum.</p>
-        </div>
-        <div class="w3-quarter">
-            <img src="/w3images/cherries.jpg" alt="Cherries" style="width:100%">
-            <h3>Cherries, interrupted</h3>
-            <p>Lorem ipsum text praesent tincidunt ipsum lipsum.</p>
-            <p>What else?</p>
-        </div>
-        <div class="w3-quarter">
-            <img src="/w3images/wine.jpg" alt="Pasta and Wine" style="width:100%">
-            <h3>Once Again, Robust Wine and Vegetable Pasta</h3>
-            <p>Lorem ipsum text praesent tincidunt ipsum lipsum.</p>
-        </div>-->
-    </div>
+    <div th:replace="~{basic/shop/itemvaluefrag :: value }"></div>
+    <!--<div th:replace="~{basic/shop/itemvaluefrag :: value }"></div>-->
+    <!--<div th:value="${value}"></div>-->
 
     <!-- Second Photo Grid-->
     <!--

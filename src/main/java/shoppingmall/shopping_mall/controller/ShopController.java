@@ -72,6 +72,6 @@ public class ShopController {
 
     @PostConstruct
     public void init(){
-        itemRepository.save(new Item("superstar", 1200000, "240 size", 2, new File("../image/superstar"), ItemType.ACC));
+        itemRepository.save(new Item("superstar", 1200000, "240 size", 2, new File("../image/superstar"), ItemType.acc));
     }
 }

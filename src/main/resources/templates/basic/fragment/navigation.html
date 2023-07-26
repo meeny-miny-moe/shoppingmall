@@ -14,14 +14,14 @@
       <li class="sub-menu">
         <a href="javascript:void(0);"><i class="fa fa-cogs"></i><span>Shop</span><i class="arrow fa fa-angle-right pull-right"></i></a>
         <ul>
-          <li><a th:onclick="|location.href='@{/shop}'|">All</a></li>
-          <li><a th:onclick="|location.href='@{/shop}'|">TOP</a>
+          <li><a th:onclick="|location.href='@{/shop?value=all}'|">All</a></li>
+          <li><a th:onclick="|location.href='@{/shop?value=top}'|">TOP</a>
           </li>
-          <li><a th:onclick="|location.href='@{/shop}'|">BOTTOM</a>
+          <li><a th:onclick="|location.href='@{/shop?value=bottom}'|">BOTTOM</a>
           </li>
-          <li><a th:onclick="|location.href='@{/shop}'|">SKIRT/DRESS</a>
+          <li><a th:onclick="|location.href='@{/shop?value=dress}'|">SKIRT/DRESS</a>
           </li>
-          <li><a th:onclick="|location.href='@{/shop}'|">ATC</a>
+          <li><a th:onclick="|location.href='@{/shop?value=acc}'|">ACC</a>
           </li>
         </ul>
       </li>

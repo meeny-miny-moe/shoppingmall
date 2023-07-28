@@ -3,7 +3,7 @@
 <head th:replace="basic/fragment/headtag :: common_header(~{::title})">
   <title>Miny</title>
 </head>
-  <style>
+<style>
     body {
   background-color: white;
 }
@@ -91,7 +91,7 @@
   width: 100%;
   margin-bottom: 10px;
 }
-.u-form-group input[type="email"],
+.u-form-group input[type="text"],
 .u-form-group input[type="password"] {
   width: calc(50% - 22px);
   height: 45px;
@@ -120,24 +120,25 @@
   border-radius: 2px;
   text-transform: uppercase;
 }
-.forgot-password {
+ .register, .forgetid, .forgetpw {
+ margin-left:45%;
   width: 50%;
   text-align: left;
   text-decoration: underline;
   color: #888;
   font-size: 0.75rem;
 }
-
+.idlabel{
+  margin-left:14px;
   </style>
 <body>
 <div th:replace="~{basic/fragment/header :: header}"></div>
 <div class="login-box">
   <div class="lb-header">
     <a href="#" class="active" id="login-box-link">Login</a>
-    <a href="#" id="signup-box-link">Sign Up</a>
   </div>
   <div class="social-login">
-    <a href="#">
+    <a th:onclick="|location.href='@{/members/join}'|">
       <i class="fa fa-facebook fa-lg"></i>
       Login in with facebook
     </a>
@@ -146,32 +147,28 @@
       log in with Google
     </a>
   </div>
-  <form class="email-login">
+  <form class="email-login" th:action th:object="${loginForm}" method="post">
     <div class="u-form-group">
-      <input type="email" placeholder="Email"/>
+      <label for="loginId" class="idlabel">아이디</label>
+      <input type="text" id="loginId" th:field="*{loginId}" th:errorclass="field-error" placeholder="Email"/>
+      <div class="field-error" th:errors="*{loginId}"></div>
     </div>
     <div class="u-form-group">
-      <input type="password" placeholder="Password"/>
+      <label for="password">비밀번호</label>
+      <input type="password" id="password" th:field="*{password}" placeholder="Password" th:errorclass="field-error"/>
+      <div class="field-error" th:errors="*{password}"></div>
     </div>
     <div class="u-form-group">
-      <button>Log in</button>
+      <button type="submit">Log in</button>
     </div>
-    <div class="u-form-group">
-      <a href="#" class="forgot-password">Forgot password?</a>
+    <div class="forgetid">
+      <a href="#"  class="forgot-id">Forgot ID?</a>
     </div>
-  </form>
-  <form class="email-signup">
-    <div class="u-form-group">
-      <input type="email" placeholder="Email"/>
+    <div class="forgetpw">
+      <a href="" class="forgot-password">Forgot Password?</a>
     </div>
-    <div class="u-form-group">
-      <input type="password" placeholder="Password"/>
-    </div>
-    <div class="u-form-group">
-      <input type="password" placeholder="Confirm Password"/>
-    </div>
-    <div class="u-form-group">
-      <button>Sign Up</button>
+    <div class="register">
+      <a th:href="@{/members/join}">Sign Up</a>
     </div>
   </form>
 </div>

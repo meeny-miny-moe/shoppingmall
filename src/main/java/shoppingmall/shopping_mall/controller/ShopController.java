@@ -69,9 +69,4 @@ public class ShopController {
         itemRepository.update(itemId, item);
         return "redirect:/item/{itemId}";
     }
-
-    @PostConstruct
-    public void init(){
-        itemRepository.save(new Item("superstar", 1200000, "240 size", 2, new File("../image/superstar"), ItemType.acc));
-    }
 }

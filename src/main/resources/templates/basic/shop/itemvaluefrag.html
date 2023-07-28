@@ -8,12 +8,7 @@
 <div th:fragment="value" class="w3-row-padding w3-padding-16 w3-center" id="food">
     <!--th:if="${widget.color.name() == 'GREEN'}"-->
     <div class="w3-quarter" th:each="item : ${items}">
-        <div th:if="${value} == 'all'">
-            <img src="../image/shoes.webp" th:src="@{/image/shoes.webp}" alt="clothes" style="width:100%">
-            <h6><a href="item.html" th:href="@{item/{itemId}(itemId=${item.id})}" th:text="${item.itemName}">상품명</a></h6>
-            <p th:text="${item.price}">10000</p>
-        </div>
-        <div th:if="${item.itemType.name()} == ${value}">
+        <div th:if="${item.itemType.name()} == ${value} or ${value} == 'all'">
             <!--<div th:value="${item.itemType.name()}"></div>
             <div th:value="${param1}"></div>-->
             <img src="../image/shoes.webp" th:src="@{/image/shoes.webp}" alt="clothes" style="width:100%">
@@ -22,15 +17,5 @@
         </div>
     </div>
 </div>
-<!--
-<div th:fragment="value" class="w3-row-padding w3-padding-16 w3-center" id="food">
-    ${#strings.equals(data.name, 'aaa')}
-th:if="${'item.itemType.name()' == '${value}'}"
-    <div class="w3-quarter" th:each="item : ${items}" th:if="${item.itemType.name() == 'top'}">
-        <img src="../image/shoes.webp" th:src="@{/image/shoes.webp}" alt="clothes" style="width:100%">
-        <h6><a href="item.html" th:href="@{item/{itemId}(itemId=${item.id})}" th:text="${item.itemName}">상품명</a></h6>
-        <p th:text="${item.price}">10000</p>
-    </div>
-</div>-->
 </body>
 </html>

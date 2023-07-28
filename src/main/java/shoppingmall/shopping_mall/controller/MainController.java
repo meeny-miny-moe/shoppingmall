@@ -41,10 +41,6 @@ public class MainController {
         return "basic/board";
 
     }
-    @GetMapping("/login")
-    public String login(Model model) {
-        return "basic/login/login";
-    }
 }
 
 

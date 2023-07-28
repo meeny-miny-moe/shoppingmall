@@ -1,6 +1,8 @@
 package shoppingmall.shopping_mall.itemService.item;
 
 import org.springframework.stereotype.Component;
+import shoppingmall.shopping_mall.itemService.item.Item;
+import shoppingmall.shopping_mall.itemService.item.ItemRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;

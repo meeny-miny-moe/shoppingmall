@@ -1,6 +1,8 @@
 package shoppingmall.shopping_mall.member;
 
 
+import shoppingmall.shopping_mall.member.Member;
+
 import java.util.List;
 import java.util.Optional;
 

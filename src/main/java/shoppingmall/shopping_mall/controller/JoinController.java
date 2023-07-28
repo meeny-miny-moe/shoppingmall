@@ -1,4 +1,4 @@
-package shoppingmall.shopping_mall.member;
+package shoppingmall.shopping_mall.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import shoppingmall.shopping_mall.member.Member;
+import shoppingmall.shopping_mall.member.MemberRepository;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/members")
 @Slf4j
-public class MemberController {
+public class JoinController {
     private final MemberRepository memberRepository;
 
     @GetMapping("/join")

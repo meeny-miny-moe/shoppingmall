@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<head th:replace="basic/fragment/headtag :: common_header(~{::title})">
+    <title>Miny</title>
+</head>
     <style>
 form {
   max-width: 32rem;
   margin: 2rem auto;
-  font-family: sans-serif;
 }
 form hr {
   margin-bottom: 2rem;
@@ -43,9 +42,14 @@ form button {
   color: forestgreen;
 }
 textarea {
-        width: 80%;
-        height: 100px;
-      }
+  width: 80%;
+  height: 100px;
+}
+.field-error {
+    color: grey;
+    font-size: small;
+    padding-top: 10px;
+}
   </style>
 </head>
 <body>
@@ -55,15 +59,19 @@ textarea {
     <div>
         <label for="itemName">상품명</label>
         <input type="text" id="itemName" th:field="*{itemName}" placeholder="상품명을 입력하세요" class="formcontrol" />
+        <div class="field-error" th:errors="*{itemName}">상품명 오류</div>
     </div>
 
     <div>
         <label for="price">Price</label>
         <input type="text" id="price" th:field="*{price}" class="form-control" placeholder="가격을 입력하세요">
+        <div class="field-error" th:errors="*{price}">가격 오류</div>
     </div>
     <div>
         <label for="quantity">수량</label>
         <input type="text" id="quantity" th:field="*{quantity}" class="formcontrol" placeholder="수량을 입력하세요">
+        <div class="field-error" th:errors="*{quantity}">수량 오류</div>
+
     </div>
     <div>
         <label for="explanation">설명</label>
@@ -72,7 +80,7 @@ textarea {
     <!--check box-->
     <div>
         <div>상품 종류</div>
-
+        <div class="field-error" th:errors="*{itemType}">상품 타입 오류</div>
         <div th:each="type : ${itemTypes}" class="form-check form-check-inline">
             <p>
             <input type="radio" th:field="*{itemType}" th:value="${type.name()}" class="form-check-input">
@@ -82,7 +90,6 @@ textarea {
             </p>
         </div>
     </div>
-
     <div>
         <label for="image">Photo Upload (Optional)</label>
         <input type="file" name="image" id="image" accept="image/png, image/jpg, image/webp">
@@ -94,8 +101,7 @@ textarea {
         </div>
         <div class="col">
             <button class="w-100 btn btn-secondary btn-lg"
-                    onclick="location.href='items.html'"
-                    th:onclick="|location.href='@{/shop}'|"
+                    th:onclick="|location.href='@{/}'|"
                     type="button">취소</button>
         </div>
     </div>

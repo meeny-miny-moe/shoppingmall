@@ -1,4 +1,4 @@
-package shoppingmall.shopping_mall.member.login;
+package shoppingmall.shopping_mall.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import shoppingmall.shopping_mall.member.Member;
+import shoppingmall.shopping_mall.member.login.LoginForm;
+import shoppingmall.shopping_mall.member.login.LoginService;
 
 @Controller
 @Slf4j

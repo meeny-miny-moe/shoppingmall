@@ -4,123 +4,69 @@
   <title>Miny</title>
 </head>
   <style>
-body {
-  margin: 0;
-  font-size: 12px;
-  font-weight: normal;
-  direction: ltr;
-  background: white;
+  body{
+  margin-top: 60px;
 }
-
 form {
-  margin: 10% auto 0 auto;
-  padding: 30px;
-  width: 400px;
-  height: auto;
-  overflow: hidden;
-  background: white;
-  border-radius: 10px;
+  max-width: 32rem;
+  margin: 2rem auto;
+}
+form hr {
+  margin-bottom: 2rem;
+}
+form > div {
+  background: #fafafa;
+  border: 1px solid #eee;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+form fieldset {
+  border: 1px solid #eee;
+}
+form button {
+  display: block;
+  width: 10rem;
+  margin: 0 auto;
+  padding: 1rem;
+  font-weight: bold;
 }
 
-form label {
-  font-size: 14px;
-  color: darkgray;
-  cursor: pointer;
+.invalid {
+  border: 1px solid #f55;
 }
 
-form label,
-form input {
-  float: left;
-  clear: both;
+.error-msg {
+  color: #f55;
+  margin-top: 0.5rem;
 }
-form input {
-  margin: 15px 0;
-  padding: 15px 10px;
-  width: 100%;
-  outline: none;
-  border: 1px solid #bbb;
-  border-radius: 20px;
-  display: inline-block;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-transition: 0.2s ease all;
-  -moz-transition: 0.2s ease all;
-  -ms-transition: 0.2s ease all;
-  -o-transition: 0.2s ease all;
-  transition: 0.2s ease all;
+
+.success {
+  background-color: #efd;
+  color: forestgreen;
 }
-form input[type="text"]:focus,
-form input[type="password"]:focus {
-  border-color: cornflowerblue;
+textarea {
+  width: 80%;
+  height: 100px;
 }
-button {
-  background-color: black;
-  color: white;
-  border: none;
-  color: white;
-   width: 48%;
-   height: 48px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
+.field-error {
+    color: grey;
+    font-size: small;
+    padding-top: 10px;
 }
 
   </style>
 <body>
-<!--
-<div th:replace="~{basic/fragment/header :: header}"></div>
-  <form action="" th:object="${member}" method="post">
-    <div class="u-form-group">
-      <label for="loginId">아이디*</label>
-      <input type="text" id="loginId" th:field="*{loginId}" th:errorclass="field-error"/>
-      <div class="field-error" th:errors="*{loginId}" />
-    </div>
-    <div class="u-form-group">
-      <label for="password">비밀번호*</label>
-      <input type="password" id="password" th:field="*{password}" th:errorclass="field-error"/>
-      <div class="field-error" th:errors="*{password}"></div>
-    </div>
-    <div class="u-form-group">
-      <label for="confirm_pw">비밀번호 확인*</label>
-      <input type="password" id="confirm_pw" th:field="*{password}" th:errorclass="field-error"/>
-      <div class="field-error" th:errors="*{password}"></div>
-    </div>
-    <div class="u-form-group">
-      <label for="name">이름*</label>
-      <input type="text" id="name" th:field="*{name}" class="formcontrol" th:errorclass="field-error">
-      <div class="field-error" th:errors="*{name}" />
-    </div>
-    <div class="u-form-group">
-      <label for="name">휴대전화*</label>
-      <input type="text" id="number" th:field="*{number}" class="formcontrol" th:errorclass="field-error">
-      <div class="field-error" th:errors="*{number}" />
-    </div>
-    <div class="u-form-group">
-      <label for="email">이메일</label>
-      <input type="text" id="email" th:field="*{email}" class="formcontrol" th:errorclass="field-error">
-      <div class="field-error" th:errors="*{email}" />
-    </div>
-          <button class="w-100 btn btn-primary btn-lg" type="submit">
-            로그인</button>
-          <button class="w-100 btn btn-secondary btn-lg"
-                  onclick="location.href='items.html'" th:onclick="|location.href='@{/}'|"
-                  type="button">취소</button>
-  </form>-->
-
-
 <div th:replace="~{basic/fragment/header :: header}"></div>
 <form action="" th:object="${member}" method="post">
   <div class="u-form-group">
     <label for="loginId">아이디*</label>
     <input type="text" id="loginId" th:field="*{loginId}"/>
+    <div class="field-error" th:errors="*{loginId}">아이디 오류</div>
   </div>
   <div class="u-form-group">
     <label for="password">비밀번호*</label>
     <input type="password" id="password" th:field="*{password}" />
+    <div class="field-error" th:errors="*{password}">비밀번호 오류</div>
   </div>
   <div class="u-form-group">
     <label for="confirm_pw">비밀번호 확인*</label>
@@ -129,15 +75,28 @@ button {
   <div class="u-form-group">
     <label for="name">이름*</label>
     <input type="text" id="name" th:field="*{name}" class="formcontrol">
+    <div class="field-error" th:errors="*{name}">이름 오류</div>
   </div>
   <div class="u-form-group">
     <label for="number">휴대전화*</label>
     <input type="text" id="number" th:field="*{number}" class="formcontrol" >
-
+    <div class="field-error" th:errors="*{number}">전화번호 오류</div>
   </div>
   <div class="u-form-group">
     <label for="email">이메일</label>
     <input type="text" id="email" th:field="*{email}" class="formcontrol">
+    <div class="field-error" th:errors="*{email}">이메일 오류</div>
+  </div>
+  <div>
+    <div class="field-error" th:errors="*{grade}">등급 오류</div>
+    <div th:each="type : ${grades}" class="form-check form-check-inline">
+      <p>
+        <input type="radio" th:field="*{Grade}" th:value="${type.name()}" class="form-check-input">
+        <label th:for="${#ids.prev('Grade')}" th:text="${type.description}" class="form-check-label">
+          MANAGER
+        </label>
+      </p>
+    </div>
   </div>
   <button class="w-100 btn btn-primary btn-lg" type="submit">회원가입</button>
   <button class="w-100 btn btn-secondary btn-lg"

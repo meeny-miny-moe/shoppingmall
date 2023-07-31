@@ -1,4 +1,4 @@
-package shoppingmall.shopping_mall.member.login;
+package shoppingmall.shopping_mall.web.validation.login;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package shoppingmall.shopping_mall.member.login;
+package shoppingmall.shopping_mall.web.validation.login;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;

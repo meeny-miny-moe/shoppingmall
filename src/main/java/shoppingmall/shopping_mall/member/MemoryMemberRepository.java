@@ -17,11 +17,12 @@ public class MemoryMemberRepository implements MemberRepository {
     private static long sequence = 0L; //static 사용
     public Member save(Member member) {
         member.setId(++sequence);
-        log.info("save: member={}", member.getLoginId());
-        log.info("save: member={}", member.getPassword());
-        log.info("save: member={}", member.getName());
-        log.info("save: member={}", member.getNumber());
-        log.info("save: member={}", member.getEmail());
+        log.info("save: memberId={}", member.getLoginId());
+        log.info("save: memberPW={}", member.getPassword());
+        log.info("save: memberName={}", member.getName());
+        log.info("save: memberNumber={}", member.getNumber());
+        log.info("save: memberEmail={}", member.getEmail());
+        log.info("save: id={}", member.getId());
         store.put(member.getId(), member);
         return member;
     }

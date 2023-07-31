@@ -13,10 +13,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import shoppingmall.shopping_mall.itemService.item.Item;
-import shoppingmall.shopping_mall.itemService.item.ItemRepository;
-import shoppingmall.shopping_mall.itemService.item.ItemType;
-import shoppingmall.shopping_mall.itemService.validation.ItemValidator;
+import shoppingmall.shopping_mall.itemService.item.*;
+import shoppingmall.shopping_mall.web.validation.item.ItemSaveForm;
+import shoppingmall.shopping_mall.web.validation.item.ItemUpdateForm;
 
 import java.io.File;
 import java.util.List;
@@ -27,13 +26,6 @@ import java.util.List;
 @RequestMapping("/item")
 public class ShopController {
     private final ItemRepository itemRepository;
-    private final ItemValidator itemValidator;
-
-    @InitBinder
-    public void init(WebDataBinder dataBinder) {
-        log.info("init binder {}", dataBinder);
-        dataBinder.addValidators(itemValidator);
-    }
 
     @ModelAttribute("itemTypes")
     public ItemType[] itemTypes(){
@@ -57,8 +49,7 @@ public class ShopController {
     }
 
     @PostMapping("/add")
-    public String addItem(@Validated @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes){
-
+    public String addItem(@Validated @ModelAttribute("item") ItemSaveForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes){
         // 검증에 실패한 경우 다시 입력 폼으로
         if(bindingResult.hasErrors()){
             log.info("errors = {}", bindingResult);
@@ -66,6 +57,13 @@ public class ShopController {
         }
 
         // 성공 로직
+        Item item = new Item();
+        item.setItemName(form.getItemName());
+        item.setPrice(form.getPrice());
+        item.setQuantity(form.getQuantity());
+        item.setExplanation(form.getExplanation());
+        item.setItemType(form.getItemType());
+
         Item savedItem = itemRepository.save(item);
         redirectAttributes.addAttribute("itemId", savedItem.getId());
         redirectAttributes.addAttribute("status",true);
@@ -80,7 +78,19 @@ public class ShopController {
         return "basic/editForm";
     }
     @PostMapping("/{itemId}/edit")
-    public String edit(@PathVariable Long itemId, @ModelAttribute Item item){
+    public String edit(@PathVariable Long itemId, @Validated @ModelAttribute("item") ItemUpdateForm form, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            log.info("errors = {}", bindingResult);
+            return "basic/editForm";
+        }
+        Item item = new Item();
+        item.setId(form.getId());
+        item.setItemName(form.getItemName());
+        item.setPrice(form.getPrice());
+        item.setQuantity(form.getQuantity());
+        item.setExplanation(form.getExplanation());
+        item.setItemType(form.getItemType());
+
         itemRepository.update(itemId, item);
         return "redirect:/item/{itemId}";
     }

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="basic/fragment/headtag :: common_header(~{::title})">
+    <title>Miny</title>
+</head>
+<!-- Material sidebar -->
+<div th:replace="~{basic/fragment/navigation :: sidebar}"></div>
+
+<!-- Top menu -->
+<div th:replace="~{basic/fragment/header :: header}"></div>
+<hr id="about">
+<!-- About Section -->
+<div class="w3-container w3-padding-32 w3-center">
+    <h3>About Me, About Me</h3><br>
+    <img src="../image/mainImage.jpg" alt="Me" class="w3-image" style="display:block;margin:auto" width="800" height="533">
+    <div class="w3-padding-32">
+        <h4><b>COMPANY MINY</b></h4>
+        <h6><i>OWNER JEONG SU-MIN | PRIVACY MANAGER JEONG SU-MIN (tnalscherry6@navere.com)</i></h6>
+        <p>Just me, myself and I, exploring the universe of unknownment. I have a heart of love and an interest of lorem ipsum and mauris neque quam blog. I want to share my world with you. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+    </div>
+</div>
+<hr>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/javascript/sidebar.js}"></script>
+</body>
+</html>

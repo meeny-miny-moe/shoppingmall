@@ -1,5 +1,9 @@
 package shoppingmall.shopping_mall.controller;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import shoppingmall.shopping_mall.member.Member;
+import shoppingmall.shopping_mall.web.session.SessionConst;
 import shoppingmall.shopping_mall.web.validation.login.LoginForm;
 import shoppingmall.shopping_mall.web.validation.login.LoginService;
 
@@ -26,7 +31,7 @@ public class LoginController {
         return "basic/members/login";
     }
     @PostMapping("/login")
-    public String login(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult, Model model){
+    public String login(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult, Model model, HttpServletRequest request){
         if(bindingResult.hasErrors()){
             log.info("errors = {}", bindingResult);
             return "basic/members/login";
@@ -39,6 +44,32 @@ public class LoginController {
             return "basic/members/login";
         }
         // 로그인 성공 처리
+        // 세션이 있으면 있는 세션 반환, 없으면 신규 세션을 반환
+        HttpSession session = request.getSession(true);
+        // 세션에 로그인 회원 정보 보관
+        session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
+
         return "redirect:/";
+    }
+    @GetMapping("/logout")
+    public String logout1(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if(session != null){
+            session.invalidate();
+        }
+        return "redirect:/";
+    }
+    @PostMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if(session != null){
+            session.invalidate();
+        }
+        return "redirect:/";
+    }
+    private void expireCookie(HttpServletResponse response, String cookieName) {
+        Cookie cookie = new Cookie(cookieName, null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
     }
 }

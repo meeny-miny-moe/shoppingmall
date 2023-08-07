@@ -15,9 +15,8 @@
     <div class="row">
         <div class="col">
             <button class="btn btn-primary float-end"
-                    onclick="location.href='addForm.html'"
-                    th:onclick="|location.href='@{/item/add}'|"
-                    type="button">상품 등록</button>
+                    th:onclick="|location.href='@{/board/product/write}'|"
+                    type="button">add</button>
         </div>
     </div>
     <!--
@@ -48,18 +47,26 @@
 
     <!-- First Photo Grid-->
     <!--상품 조건문 템플릿 조각 사용-->
-    <div th:fragment="value" class="w3-row-padding w3-padding-16 w3-center" id="food">
+
+    <!--<div th:fragment="value" class="w3-row-padding w3-padding-16 w3-center" id="food">-->
         <!--th:if="${widget.color.name() == 'GREEN'}"-->
-        <div class="w3-quarter" th:each="item : ${items}">
+        <!--<div class="w3-quarter" th:each="item : ${items}">
             <div th:if="${item.itemType.name()} == ${value} or ${value} == 'all'">
-                <!--<div th:value="${item.itemType.name()}"></div>
-                <div th:value="${param1}"></div>-->
+
                 <img src="../image/shoes.webp" th:src="@{/image/shoes.webp}" alt="clothes" style="width:100%">
                 <h6><a href="item.html" th:href="@{item/{itemId}(itemId=${item.id})}" th:text="${item.itemName}">상품명</a></h6>
                 <p th:text="${item.price}">10000</p>
             </div>
+        </div>-->
+    <div class="w3-row-padding w3-padding-16 w3-center" id="food">
+        <!--th:if="${widget.color.name() == 'GREEN'}"-->
+        <div class="w3-quarter" th:each="question : ${questions}">
+            <div>
+                <h6><a href="item.html" th:text="${question.questionType}">질문 종류</a></h6>
+            </div>
         </div>
     </div>
+
     <!--<div th:replace="~{basic/shop/itemvaluefrag :: value }"></div>-->
     <!--<div th:value="${value}"></div>-->
 
@@ -114,7 +121,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" th:src="@{/javascript/sidebar.js}"></script>
 
-    <!-- End page content -->
+<!-- End page content -->
 
 </body>
 </html>

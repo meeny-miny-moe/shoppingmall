@@ -27,7 +27,7 @@ public class TestDataInit {
         member.setName("테스터");
         member.setEmail("test@gmail.com");
         member.setNumber("01012341234");
-        member.setGrade(Grade.MANAGER);
+        member.setGrade(Grade.CUSTOMER);
 
         memberRepository.save(member);
     }

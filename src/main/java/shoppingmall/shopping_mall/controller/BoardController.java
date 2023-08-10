@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import shoppingmall.shopping_mall.itemService.item.Item;
-import shoppingmall.shopping_mall.itemService.item.ItemType;
 import shoppingmall.shopping_mall.itemService.question.Question;
 import shoppingmall.shopping_mall.itemService.question.QuestionRepository;
 import shoppingmall.shopping_mall.itemService.question.QuestionType;

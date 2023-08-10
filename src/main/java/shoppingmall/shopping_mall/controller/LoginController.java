@@ -19,6 +19,8 @@ import shoppingmall.shopping_mall.web.session.SessionConst;
 import shoppingmall.shopping_mall.web.validation.login.LoginForm;
 import shoppingmall.shopping_mall.web.validation.login.LoginService;
 
+import static shoppingmall.shopping_mall.member.Grade.MANAGER;
+
 @Controller
 @Slf4j
 @RequiredArgsConstructor
@@ -46,8 +48,11 @@ public class LoginController {
         // 로그인 성공 처리
         // 세션이 있으면 있는 세션 반환, 없으면 신규 세션을 반환
         HttpSession session = request.getSession(true);
+
         // 세션에 로그인 회원 정보 보관
+        session.setAttribute("sessionTest", "Y");
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
+        session.setAttribute(SessionConst.LOGIN_GRADE, loginMember.getGrade());
 
         return "redirect:/";
     }

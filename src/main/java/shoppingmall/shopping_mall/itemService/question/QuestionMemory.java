@@ -38,6 +38,11 @@ public class QuestionMemory implements QuestionRepository{
         findQuestion.setPassword(updateParam.getPassword());
         findQuestion.setExplanation(updateParam.getExplanation());
     }
+    @Override
+    public void delete(Long questionId){
+        Question question = findById(questionId);
+        store.remove(questionId,question);
+    }
 
     @Override
     public void clearStore() {

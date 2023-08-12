@@ -13,5 +13,7 @@ public interface QuestionRepository {
 
     void update(Long questionId, Question updateParam);
 
+    void delete(Long questionId);
+
     void clearStore();
 }

@@ -60,9 +60,9 @@
         </div>-->
     <div class="w3-row-padding w3-padding-16 w3-center" id="food">
         <!--th:if="${widget.color.name() == 'GREEN'}"-->
-        <div class="w3-quarter" th:each="question : ${questions}">
+        <div class="w3-quarter" th:each="question : ${questions}" style="width: 100%">
             <div>
-                <h6><a href="item.html" th:text="${question.questionType}">질문 종류</a></h6>
+                <h6><a href="item.html" th:text="${question.questionType}" th:href="@{article/{questionId}(questionId=${question.id})}">질문 종류</a></h6>
             </div>
         </div>
     </div>

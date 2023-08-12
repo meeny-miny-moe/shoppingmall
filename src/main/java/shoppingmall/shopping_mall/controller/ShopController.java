@@ -75,13 +75,13 @@ public class ShopController {
     public String editForm(@PathVariable Long itemId, Model model){
         Item item = itemRepository.findById(itemId);
         model.addAttribute("item", item);
-        return "basic/editForm";
+        return "basic/shop/editForm";
     }
     @PostMapping("/{itemId}/edit")
     public String edit(@PathVariable Long itemId, @Validated @ModelAttribute("item") ItemUpdateForm form, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             log.info("errors = {}", bindingResult);
-            return "basic/editForm";
+            return "basic/shop/editForm";
         }
         Item item = new Item();
         item.setId(form.getId());

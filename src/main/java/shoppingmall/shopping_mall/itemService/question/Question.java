@@ -13,6 +13,7 @@ public class Question {
     private String email;
     private File image;
     private Integer password;
+    private Integer questionCheck; // 비밀번호 확인
 
     private String Answer;
 

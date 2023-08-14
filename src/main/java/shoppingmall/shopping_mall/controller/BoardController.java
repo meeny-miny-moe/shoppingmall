@@ -1,18 +1,20 @@
 package shoppingmall.shopping_mall.controller;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.connector.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import shoppingmall.shopping_mall.itemService.item.Item;
 import shoppingmall.shopping_mall.itemService.question.Question;
 import shoppingmall.shopping_mall.itemService.question.QuestionRepository;
 import shoppingmall.shopping_mall.itemService.question.QuestionType;
-import shoppingmall.shopping_mall.web.validation.item.ItemUpdateForm;
+import shoppingmall.shopping_mall.member.Grade;
+import shoppingmall.shopping_mall.web.session.SessionConst;
 import shoppingmall.shopping_mall.web.validation.question.QuestionSaveForm;
 import shoppingmall.shopping_mall.web.validation.question.QuestionUpdateForm;
 
@@ -64,12 +66,42 @@ public class BoardController {
 
        return "redirect:/board/product";
     }
-    // 해당 질문으로 이동
+    // 해당 질문으로 이동 (상세보기)
     @GetMapping("article/{questionId}")
-    public String question(@PathVariable long questionId, Model model){
+    public String question(@PathVariable long questionId, Model model,HttpSession session){
         Question question = questionRepository.findById(questionId);
         model.addAttribute("question", question);
-        return "basic/board/question";
+        log.info("question = {}", question);
+        // 비번 없는 경우
+        Object loginGrade = session.getAttribute("loginGrade");
+
+        log.info("loginGrade = {}", loginGrade);
+        log.info("SessionConst.LOGIN_GRADE = {}", SessionConst.LOGIN_GRADE);
+        log.info("Grade.MANAGER = {}", Grade.MANAGER);
+
+        if(question.getPassword() == null || question.getPassword() == question.getQuestionCheck()
+           || loginGrade == Grade.MANAGER ){
+            return "basic/board/question";
+        }
+        // 비번 있는 경우
+        return "basic/board/password";
+    }
+    @PostMapping("article/{questionId}")
+    public String question(@PathVariable long questionId, @ModelAttribute("question") Question form, Model model){
+        Question question = questionRepository.findById(questionId);
+        model.addAttribute("question", question);
+        /*
+        log.info("question = {}", question.getPassword());
+        log.info("question.checkPassword ={}", form.getQuestionCheck());
+
+        log.info("question.getPassword type = {}", question.getPassword().getClass().getName());
+        log.info("form.getQuestionCheck type = {}", form.getQuestionCheck().getClass().getName());
+        */
+        if(question.getPassword().equals(form.getQuestionCheck())){
+            log.info("same");
+            return "basic/board/question";
+        }
+        return "basic/board/qnalist";
     }
     // 수정하기
     @GetMapping("article/{questionId}/edit")
@@ -79,11 +111,12 @@ public class BoardController {
         return "basic/board/questionEditForm";
     }
     @PostMapping("article/{questionId}/edit")
-    public String edit(@PathVariable Long questionId, @Validated @ModelAttribute("question") QuestionUpdateForm form, BindingResult bindingResult){
+    public String edit(@PathVariable Long questionId, @Validated @ModelAttribute("question") QuestionUpdateForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes){
         if(bindingResult.hasErrors()){
             log.info("errors = {}", bindingResult);
             return "basic/board/questionEditForm";
         }
+
         Question question = new Question();
         question.setId(form.getId());
         question.setQuestionType(form.getQuestionType());
@@ -93,7 +126,9 @@ public class BoardController {
         question.setImage(form.getImage());
         question.setPassword(form.getPassword());
 
+        //log.info("question = {}", question);
         questionRepository.update(questionId, question);
+
         return "redirect:/board/article/{questionId}";
     }
 

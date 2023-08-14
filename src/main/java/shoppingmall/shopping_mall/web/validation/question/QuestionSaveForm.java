@@ -19,6 +19,4 @@ public class QuestionSaveForm {
     private String explanation;
     private File image;
     private Integer password;
-
-
 }

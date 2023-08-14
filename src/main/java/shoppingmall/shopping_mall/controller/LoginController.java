@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import shoppingmall.shopping_mall.member.Member;
+import shoppingmall.shopping_mall.member.MemberRepository;
 import shoppingmall.shopping_mall.web.session.SessionConst;
 import shoppingmall.shopping_mall.web.validation.login.LoginForm;
 import shoppingmall.shopping_mall.web.validation.login.LoginService;
+
+import java.util.Optional;
 
 import static shoppingmall.shopping_mall.member.Grade.MANAGER;
 
@@ -27,6 +30,7 @@ import static shoppingmall.shopping_mall.member.Grade.MANAGER;
 @RequestMapping("/members")
 public class LoginController {
     private final LoginService loginService;
+    private final MemberRepository memberRepository;
 
     @GetMapping("/login")
     public String loginFrom(@ModelAttribute("loginForm") LoginForm form){
@@ -51,6 +55,7 @@ public class LoginController {
 
         // 세션에 로그인 회원 정보 보관
         session.setAttribute("sessionTest", "Y");
+        session.setAttribute("loginGrade", loginMember.getGrade());
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
         session.setAttribute(SessionConst.LOGIN_GRADE, loginMember.getGrade());
 

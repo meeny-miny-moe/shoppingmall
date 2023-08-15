@@ -86,7 +86,7 @@ background:transparent;
 <!-- About Section -->
 <div>
   <div class="w3-container w3-padding-32 w3-center" style="width:60%;float:left">
-    <img src="../image/superstar.webp" th:src="@{/image/shoes.webp}" alt="Me" class="w3-image" style="display:block;margin:auto" width="800" height="533">
+    <img th:each="imageFile : ${item.imageFiles}" th:src="|/item/images/${imageFile.getStoreFileName()}|"alt="Me" class="w3-image" style="display:block;margin:auto" width="800" height="533">
     <!--th:src="${item.image}"-->
   </div>
   <div class="w3-padding-32" style="height:40%;width:40%;float:right">

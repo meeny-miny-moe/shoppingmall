@@ -19,7 +19,6 @@ public class MemoryRepository implements ItemRepository {
         store.put(item.getId(), item);
         return item;
     }
-
     @Override
     public Item findById(Long id) {
        return store.get(id);
@@ -37,9 +36,8 @@ public class MemoryRepository implements ItemRepository {
         findItem.setPrice(updateParam.getPrice());
         findItem.setExplanation(updateParam.getExplanation());
         findItem.setQuantity(updateParam.getQuantity());
-        findItem.setImage(updateParam.getImage());
+        findItem.setImageFiles(updateParam.getImageFiles());
     }
-
     @Override
     public void clearStore() {
         store.clear();

@@ -34,7 +34,7 @@ public class QuestionMemory implements QuestionRepository{
         findQuestion.setQuestionType(updateParam.getQuestionType());
         findQuestion.setWriter(updateParam.getWriter());
         findQuestion.setEmail(updateParam.getEmail());
-        findQuestion.setImage(updateParam.getImage());
+        findQuestion.setImageFiles(updateParam.getImageFiles());
         findQuestion.setPassword(updateParam.getPassword());
         findQuestion.setExplanation(updateParam.getExplanation());
     }

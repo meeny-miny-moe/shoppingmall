@@ -22,7 +22,7 @@ public class WebConfig implements WebMvcConfigurer {
         // 필수로 로그인을 해야 들어갈 수 있는 부분들
         registry.addInterceptor(new LoginCheckInterceptor())
                 .order(2)
-                .addPathPatterns("/myshop/index","/members/logout", "/board/product/write" );
+                .addPathPatterns("/myshop/index","/members/logout", "/board/product/write", "/item/add");
         // 관리자만 들어갈 수 있는 부분
         registry.addInterceptor(new ManagerInterceptor())
                 .order(3)

@@ -54,7 +54,7 @@ textarea {
 </head>
 <body>
 
-<form action="item.html" th:action th:object="${item}" method="post">
+<form action="item.html" th:action th:object="${item}" method="post" enctype="multipart/form-data">
     <h1>Product Registration Form</h1>
     <hr/>
     <div>
@@ -97,9 +97,13 @@ textarea {
     </div>
 
     <div>
-        <label for="image">Photo Upload (Optional)</label>
-        <input type="file" name="image" id="image" accept="image/png, image/jpg, image/webp" th:value="${item.image}">
+        <label for="imageFiles">Photo Upload (Optional)</label>
+        <input type="file" multiple="multiple" name="imageFiles" id="imageFiles">
     </div>
+    <!--
+    <div class="w3-container w3-padding-32 w3-center" style="width:60%;float:left">
+        <img th:if="${item.imageFiles}!=null" th:each="imageFile : ${item.imageFiles}" th:src="|/item/images/${imageFile.getStoreFileName()}|"alt="Me" class="w3-image" style="display:block;margin:auto" width="100" height="100">
+    </div>-->
 
     <div class="row">
         <div class="col">

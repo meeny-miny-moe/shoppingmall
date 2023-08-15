@@ -11,19 +11,12 @@ import java.io.File;
 import java.util.List;
 
 @Data
-public class ItemUpdateForm {
-    @NotNull
-    private Long id;
-    @NotBlank
+public class ItemForm {
     private String itemName;
     private Integer price;
     private String explanation;
-    @NotNull
-    @Min(0)
     private Integer quantity;
     private List<MultipartFile> imageFiles;
-    @NotNull
+
     private ItemType itemType; // 상품 분류 종류
-
-
 }

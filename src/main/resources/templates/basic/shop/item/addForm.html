@@ -53,7 +53,7 @@ textarea {
   </style>
 </head>
 <body>
-<form action="item.html" th:action th:object="${item}" method="post">
+<form action="item.html" th:action th:object="${item}" method="post" enctype="multipart/form-data">
     <h1>Product Registration Form</h1>
     <hr />
     <div>
@@ -90,10 +90,9 @@ textarea {
         </div>
     </div>
     <div>
-        <label for="image">Photo Upload (Optional)</label>
-        <input type="file" name="image" id="image" accept="image/png, image/jpg, image/webp">
+        <label for="imageFiles">Photo Upload (Optional)</label>
+        <input type="file" multiple="multiple" name="imageFiles" id="imageFiles">
     </div>
-
     <div class="row">
         <div class="col">
             <button class="w-100 btn btn-primary btn-lg" type="submit">상품 등록</button>

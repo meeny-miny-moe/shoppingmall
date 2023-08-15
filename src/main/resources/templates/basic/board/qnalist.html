@@ -19,81 +19,16 @@
                     type="button">add</button>
         </div>
     </div>
-    <!--
-    <hr class="my-4">
-    <div>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>상품명</th>
-                <th>가격</th>
-                <th>수량</th>
-                <th>설명</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="item : ${items}">
-                <td><a href="item.html" th:href="@{item/{itemId}(itemId=${item.id})}" th:text="${item.id}">상품id</a></td>
-                <td><a href="item.html" th:href="@{|/items/${item.id}|}" th:text="${item.itemName}">상품명</a></td>
-                <td th:text="${item.price}">10000</td>
-                <td th:text="${item.quantity}">10</td>
-                <td th:text="${item.quantity}">hello</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
--->
 
     <!-- First Photo Grid-->
     <!--상품 조건문 템플릿 조각 사용-->
-
-    <!--<div th:fragment="value" class="w3-row-padding w3-padding-16 w3-center" id="food">-->
-        <!--th:if="${widget.color.name() == 'GREEN'}"-->
-        <!--<div class="w3-quarter" th:each="item : ${items}">
-            <div th:if="${item.itemType.name()} == ${value} or ${value} == 'all'">
-
-                <img src="../image/shoes.webp" th:src="@{/image/shoes.webp}" alt="clothes" style="width:100%">
-                <h6><a href="item.html" th:href="@{item/{itemId}(itemId=${item.id})}" th:text="${item.itemName}">상품명</a></h6>
-                <p th:text="${item.price}">10000</p>
-            </div>
-        </div>-->
     <div class="w3-row-padding w3-padding-16 w3-center" id="food">
-        <!--th:if="${widget.color.name() == 'GREEN'}"-->
         <div class="w3-quarter" th:each="question : ${questions}" style="width: 100%">
             <div>
                 <h6><a href="item.html" th:text="${question.questionType}" th:href="@{article/{questionId}(questionId=${question.id})}">질문 종류</a></h6>
             </div>
         </div>
     </div>
-
-    <!--<div th:replace="~{basic/shop/itemvaluefrag :: value }"></div>-->
-    <!--<div th:value="${value}"></div>-->
-
-    <!-- Second Photo Grid-->
-    <!--
-    <div class="w3-row-padding w3-padding-16 w3-center">
-        <div class="w3-quarter">
-            <img src="/w3images/popsicle.jpg" alt="Popsicle" style="width:100%">
-            <h3>All I Need Is a Popsicle</h3>
-            <p>Lorem ipsum text praesent tincidunt ipsum lipsum.</p>
-        </div>
-        <div class="w3-quarter">
-            <img src="/w3images/salmon.jpg" alt="Salmon" style="width:100%">
-            <h3>Salmon For Your Skin</h3>
-            <p>Once again, some random text to lorem lorem lorem lorem ipsum text praesent tincidunt ipsum lipsum.</p>
-        </div>
-        <div class="w3-quarter">
-            <img src="/w3images/sandwich.jpg" alt="Sandwich" style="width:100%">
-            <h3>The Perfect Sandwich, A Real Classic</h3>
-            <p>Just some random text, lorem ipsum text praesent tincidunt ipsum lipsum.</p>
-        </div>
-        <div class="w3-quarter">
-            <img src="/w3images/croissant.jpg" alt="Croissant" style="width:100%">
-            <h3>Le French</h3>
-            <p>Lorem lorem lorem lorem ipsum text praesent tincidunt ipsum lipsum.</p>
-        </div>
-    </div>-->
 
     <!-- Pagination -->
 

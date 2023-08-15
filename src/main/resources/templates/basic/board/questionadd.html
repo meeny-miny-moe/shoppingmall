@@ -53,7 +53,7 @@ textarea {
   </style>
 </head>
 <body>
-<form action="item.html" th:action th:object="${question}" method="post">
+<form action="item.html" th:action th:object="${question}" method="post" enctype="multipart/form-data">
   <h1>Product Registration Form</h1>
   <hr />
   <div>
@@ -66,19 +66,6 @@ textarea {
               th:text="${questionType.description}">상품 문의</option>
     </select>
   </div>
-<!--
-    <div>
-      <div>질문 종류</div>
-      <div class="field-error" th:errors="*{questionType}">질문 타입 오류</div>
-      <div th:each="type : ${questionTypes}" class="form-check form-check-inline">
-        <p>
-          <input type="radio" th:field="*{questionType}" th:value="${type.name()}" class="form-check-input">
-          <label th:for="${#ids.prev('questionType')}" th:text="${type.description}" class="form-check-label">
-            상품 문의
-          </label>
-        </p>
-      </div>
-    </div>-->
   <div>
     <label for="writer">작성자</label>
     <input type="text" id="writer" th:field="*{writer}" class="form-control" placeholder="작성자를 입력하세요">
@@ -95,8 +82,8 @@ textarea {
   </div>
   <!--check box-->
   <div>
-    <label for="image">Photo Upload (Optional)</label>
-    <input type="file" name="image" id="image" accept="image/png, image/jpg, image/webp">
+    <label for="imageFiles">Photo Upload (Optional)</label>
+    <input type="file" multiple="multiple" name="imageFiles" id="imageFiles">
   </div>
   <div>
     <label for="password">비밀번호</label>

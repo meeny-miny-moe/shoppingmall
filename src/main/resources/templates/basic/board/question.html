@@ -53,7 +53,7 @@ textarea {
   </style>
 </head>
 <body>
-<form action="item.html" th:action th:object="${question}" method="post">
+<form action="item.html" th:action th:object="${question}" method="post" enctype="multipart/form-data">
   <h1>Product Registration Form</h1>
   <hr />
 
@@ -80,12 +80,8 @@ textarea {
   </div>
   <!--check box-->
   <div>
-    <label for="image">Photo Upload (Optional)</label>
-    <input type="file" name="image" id="image" accept="image/png, image/jpg, image/webp">
-  </div>
-  <div>
-    <label for="password">비밀번호</label>
-    <input type="text" id="password" th:field="*{password}" class="formcontrol">
+    <img th:each="imageFile : *{imageFiles}" th:src="|/board/images/${imageFile.getStoreFileName()}|"alt="Me" class="w3-image" style="display:block;margin:auto" width="800" height="533">
+    <!--th:src="${item.image}"-->
   </div>
 
   <div class="row">

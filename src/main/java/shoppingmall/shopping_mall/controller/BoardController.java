@@ -4,12 +4,16 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.connector.Request;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import shoppingmall.shopping_mall.itemService.file.FileStore;
+import shoppingmall.shopping_mall.itemService.item.UploadFile;
 import shoppingmall.shopping_mall.itemService.question.Question;
 import shoppingmall.shopping_mall.itemService.question.QuestionRepository;
 import shoppingmall.shopping_mall.itemService.question.QuestionType;
@@ -18,6 +22,8 @@ import shoppingmall.shopping_mall.web.session.SessionConst;
 import shoppingmall.shopping_mall.web.validation.question.QuestionSaveForm;
 import shoppingmall.shopping_mall.web.validation.question.QuestionUpdateForm;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 
 @Slf4j
@@ -26,6 +32,8 @@ import java.util.List;
 @RequestMapping("/board")
 public class BoardController {
     private final QuestionRepository questionRepository;
+    private final FileStore fileStore;
+
     @ModelAttribute("questionTypes")
     public QuestionType[] questionTypes(){
         return QuestionType.values();
@@ -46,20 +54,21 @@ public class BoardController {
         return "basic/board/questionadd";
     }
     @PostMapping("product/write")
-    public String addQuestion(@Validated @ModelAttribute("question") QuestionSaveForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String addQuestion(@Validated @ModelAttribute("question") QuestionSaveForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws IOException {
 
         if(bindingResult.hasErrors()){
             log.info("errors = {}", bindingResult);
             return "basic/board/questionadd";
         }
+        List<UploadFile> storeImageFiles = fileStore.storeFiles(form.getImageFiles());
         // 성공 로직
         Question question = new Question();
         question.setQuestionType(form.getQuestionType());
         question.setWriter(form.getWriter());
         question.setExplanation(form.getExplanation());
         question.setEmail(form.getEmail());
-        question.setImage(form.getImage());
         question.setPassword(form.getPassword());
+        question.setImageFiles(storeImageFiles);
 
         Question savedQuestion = questionRepository.save(question);
         redirectAttributes.addAttribute("questionId", savedQuestion.getId());
@@ -90,13 +99,7 @@ public class BoardController {
     public String question(@PathVariable long questionId, @ModelAttribute("question") Question form, Model model){
         Question question = questionRepository.findById(questionId);
         model.addAttribute("question", question);
-        /*
-        log.info("question = {}", question.getPassword());
-        log.info("question.checkPassword ={}", form.getQuestionCheck());
 
-        log.info("question.getPassword type = {}", question.getPassword().getClass().getName());
-        log.info("form.getQuestionCheck type = {}", form.getQuestionCheck().getClass().getName());
-        */
         if(question.getPassword().equals(form.getQuestionCheck())){
             log.info("same");
             return "basic/board/question";
@@ -111,11 +114,12 @@ public class BoardController {
         return "basic/board/questionEditForm";
     }
     @PostMapping("article/{questionId}/edit")
-    public String edit(@PathVariable Long questionId, @Validated @ModelAttribute("question") QuestionUpdateForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+    public String edit(@PathVariable Long questionId, @Validated @ModelAttribute("question") QuestionUpdateForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws IOException {
         if(bindingResult.hasErrors()){
             log.info("errors = {}", bindingResult);
             return "basic/board/questionEditForm";
         }
+        List<UploadFile> storeImageFiles = fileStore.storeFiles(form.getImageFiles());
 
         Question question = new Question();
         question.setId(form.getId());
@@ -123,8 +127,8 @@ public class BoardController {
         question.setWriter(form.getWriter());
         question.setEmail(form.getEmail());
         question.setExplanation(form.getExplanation());
-        question.setImage(form.getImage());
         question.setPassword(form.getPassword());
+        question.setImageFiles(storeImageFiles);
 
         //log.info("question = {}", question);
         questionRepository.update(questionId, question);
@@ -138,5 +142,10 @@ public class BoardController {
         questionRepository.delete(questionId);
 
         return "redirect:/board/product";
+    }
+    @ResponseBody
+    @GetMapping("/images/{filename}")
+    public Resource downloadImage(@PathVariable String filename) throws MalformedURLException {
+        return new UrlResource("file:" + fileStore.getFullPath(filename));
     }
 }

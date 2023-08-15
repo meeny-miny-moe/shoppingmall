@@ -53,7 +53,7 @@ textarea {
   </style>
 </head>
 <body>
-<form action="item.html" th:action th:object="${question}" method="post">
+<form action="item.html" th:action th:object="${question}" method="post" enctype="multipart/form-data">
   <h1>Product Registration Form</h1>
   <hr />
   <div>
@@ -86,8 +86,8 @@ textarea {
   </div>
   <!--check box-->
   <div>
-    <label for="image">Photo Upload (Optional)</label>
-    <input type="file" name="image" id="image" accept="image/png, image/jpg, image/webp">
+    <label for="imageFiles">Photo Upload (Optional)</label>
+    <input type="file" multiple="multiple" name="imageFiles" id="imageFiles">
   </div>
   <div>
     <label for="password">비밀번호</label>
